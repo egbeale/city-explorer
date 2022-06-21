@@ -4,6 +4,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
 
+// RAN OUT OF TIME. I'LL FIGURE IT OUT TOMORROW.
 
 class App extends React.Component {
   construtor(props) {
@@ -15,7 +16,7 @@ class App extends React.Component {
     }
   }
 
-//Input handler. Gives us the data from the input.
+//Input handler.
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -31,8 +32,8 @@ class App extends React.Component {
           <Form.Label></Form.Label>
           <Form.Control
             type='text'
-            id='cityName'
-            onChange={this.props.handleChange}
+            id=''
+            // onChange={this.props.handle...}
           />
           <button type='submit' onClick={this.props.handleSubmit}>Explore!</button>
 
