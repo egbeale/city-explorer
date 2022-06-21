@@ -1,14 +1,13 @@
 # 301 Lab 6
 
 **Author**: Elizabeth Beale
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.1.3
 
 ## Overview
 
-Create city explorer app API
+Create city explorer app API and implement location search.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
 
@@ -25,10 +24,8 @@ Worked with Marvin Bonds.
 
 Name of feature: Location IQ Geocoding API
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 3 hrs?
 
-Start time: _____
+Actual time needed to complete: 4 hrs
 
-Finish time: _____
-
-Actual time needed to complete: _____
+![Screen Shot 2022-06-20 at 2 25 21 PM](https://user-images.githubusercontent.com/100111219/174900965-8a3093fe-421f-4d98-a29a-f3ea97516bd1.png)
