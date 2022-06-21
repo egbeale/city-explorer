@@ -1,14 +1,13 @@
 # City Explorer
 
 **Author**: Elizabeth Beale
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.1.3
 
 ## Overview
 
  Build an application that allows a user to input a city and see a map of that location. 
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 - Clone this repository using `git clone`
 - Run `npm install`
@@ -29,6 +28,4 @@ Estimate of time needed to complete: 4 hrs
 
 Actual time needed to complete: 5.5 hrs
 
-Finish time: _____
-
-Actual time needed to complete: _____
+![Screen Shot 2022-06-20 at 2 25 21 PM](https://user-images.githubusercontent.com/100111219/174900965-8a3093fe-421f-4d98-a29a-f3ea97516bd1.png)
