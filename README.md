@@ -1,33 +1,33 @@
-# 301 Lab 6
+# City Explorer
 
 **Author**: Elizabeth Beale
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 
-Create city explorer app API
+ Build an application that allows a user to input a city and see a map of that location. 
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
+- Clone this repository using `git clone`
+- Run `npm install`
+- Add your API key to `.env.sample`
+- Run `npm start`
+
 ## Architecture
 
-Created using React, Node, React-Bootstrap, JavaScript
+- Created using Axios, React, React-Bootstrap, JavaScript, CSS, and HTML
 
-## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+- Deployed with Netlify
 
 ## Credit and Collaborations
 
-Worked with Marvin Bonds.
+Lab 1: Collaborated with Marvin Bonds.
 
-Name of feature: Location IQ Geocoding API
+Estimate of time needed to complete: 4 hrs
 
-Estimate of time needed to complete: _____
-
-Start time: _____
+Actual time needed to complete: 5.5 hrs
 
 Finish time: _____
 
