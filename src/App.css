@@ -1,4 +1,4 @@
-body { 
+body {
   background-color: whitesmoke;
   text-align: center;
 }
@@ -26,6 +26,7 @@ form {
   border-radius: 40px;
   padding: 10px;
 }
+
 .form-control {
   border: none;
   height: 3vw;
@@ -48,7 +49,9 @@ button {
   cursor: pointer;
 }
 
+
+
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
