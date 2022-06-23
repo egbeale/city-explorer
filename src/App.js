@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert'
+import Header from './Header.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class App extends React.Component {
   }
 
   handleInput = (e) => {
-    this.setState ({
-      city: e.target.value      
-    });    
+    this.setState({
+      city: e.target.value
+    });
   };
 
   handleSubmit = async (event) => {
@@ -34,13 +35,13 @@ class App extends React.Component {
 
       let cityMap = await `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=11`;
 
-      this.setState ({
+      this.setState({
         cityData: cityData.data[0],
         cityMap: cityMap
       });
     }
-    catch(error) {
-      this.setState ({
+    catch (error) {
+      this.setState({
         error: true,
         errorMessage: `Oops, an error occurred: ${error.response.status}. Refresh the page and try again.`
       })
@@ -49,32 +50,30 @@ class App extends React.Component {
 
   render() {
     return (
-    <>
-      <header>
-        <h1>CITY EXPLORER</h1>
-      </header>      
-      <Form>
-        <Form.Group>
-          <Form.Label>City Search:</Form.Label>
-          <Form.Control 
-            type='text' 
-            placeholder='Type your city' 
-            onInput={this.handleInput}>
-          </Form.Control>
-          <button type='submit' onClick={this.handleSubmit}>EXPLORE</button>
-        </Form.Group>
-      </Form>
-      {this.state.error?<Alert variant="warning">{this.state.errorMessage}</Alert>:
       <>
-        <ListGroup as='list-group'>
-          <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
-          <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
-          <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-        </ListGroup>      
-        <Image src={this.state.cityMap}></Image>
-      </>}
-      <footer>© Elizabeth Beale</footer>
-    </>
+        <Header />
+        <Form>
+          <Form.Group>
+            <Form.Label>City Search:</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Type your city'
+              onInput={this.handleInput}>
+            </Form.Control>
+            <button type='submit' onClick={this.handleSubmit}>EXPLORE</button>
+          </Form.Group>
+        </Form>
+        {this.state.error ? <Alert variant="warning">{this.state.errorMessage}</Alert> :
+          <>
+            <ListGroup as='list-group'>
+              <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
+              <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
+              <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
+            </ListGroup>
+            <Image src={this.state.cityMap}></Image>
+          </>}
+        <footer>© Elizabeth Beale</footer>
+      </>
     )
   };
 }
