@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import './Search.css';
+import './SearchBar.css';
 
-class Search extends React.Component {
+class SearchBar extends React.Component {
 
 
 
@@ -23,4 +23,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default SearchBar;
