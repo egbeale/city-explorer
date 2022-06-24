@@ -6,6 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert'
 import Header from './Header.js';
+import Weather from './Weather.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class App extends React.Component {
       cityData: {},
       cityMap: '',
       error: false,
-      errorMessage: '',
+      errorMsg: '',
+      weatherData: [],
+      displayWeather: false
     }
   }
 
@@ -39,13 +42,34 @@ class App extends React.Component {
         cityData: cityData.data[0],
         cityMap: cityMap
       });
+      this.getWeather(cityData.data[0].lat, cityData.data[0].lon);
     }
+
     catch (error) {
       this.setState({
         error: true,
-        errorMessage: `Oops, an error occurred: ${error.response.status}. Refresh the page and try again.`
+        errorMsg: `Oops, an error occurred: ${error.response.status}. Refresh the page and try again.`
       })
+    };
+
+    getWeather = async (lat, lon) => {
+      let url = `${process.env.REACT_APP_SERVER}weather?lat=${lat}&lon=${lon}`
+      try {
+        let weatherData = await axios.get(url);
+        this.setState({
+          weatherData: weatherData.data,
+          displayWeather: true
+        });
+
+      } catch (error) {
+        this.setState({
+          error: true,
+          errorMsg: `Error: No weather.`
+        })
+      }
     }
+
+
   };
 
   render() {
@@ -63,15 +87,16 @@ class App extends React.Component {
             <button type='submit' onClick={this.handleSubmit}>EXPLORE</button>
           </Form.Group>
         </Form>
-        {this.state.error ? <Alert variant="warning">{this.state.errorMessage}</Alert> :
+        {this.state.error ? <Alert>{this.state.errorMsg}</Alert> :
           <>
-            <ListGroup as='list-group'>
+            <ListGroup>
               <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
               <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
               <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
             </ListGroup>
             <Image src={this.state.cityMap}></Image>
           </>}
+          <Weather weatherData={this.state.weatherData}></Weather>
         <footer>© Elizabeth Beale</footer>
       </>
     )
