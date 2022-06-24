@@ -14,9 +14,9 @@ class Search extends React.Component {
           <Form.Control
             type='text'
             placeholder='Type your city'
-            onInput={this.handleInput}>
+            onInput={this.props.handleInput}>
           </Form.Control>
-          <button type='submit' onClick={this.handleSubmit}>EXPLORE</button>
+          <button type='submit' onClick={this.props.handleSubmit}>EXPLORE</button>
         </Form.Group>
       </Form>
     );
