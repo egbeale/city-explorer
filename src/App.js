@@ -4,7 +4,7 @@ import './App.css';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 import Header from './Header.js';
-import Forecast from './Forecast.js';
+import Weather from './Weather.js';
 import CityInfo from './CityInfo.js';
 import SearchBar from './SearchBar.js';
 
@@ -87,7 +87,7 @@ class App extends React.Component {
 
           </>}
 
-        <Forecast weatherData={this.state.weatherData} city={this.state.city} />
+        <Weather weatherData={this.state.weatherData} city={this.state.city} />
         <footer>© Elizabeth Beale</footer>
       </>
     )

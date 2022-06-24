@@ -1,7 +1,7 @@
 import React from 'react';
-import './Forecast.css'
+import './Weather.css'
 
-class Forecast extends React.Component {
+class Weather extends React.Component {
     render() {
         return (
             <>
@@ -20,4 +20,4 @@ class Forecast extends React.Component {
 
 }
 
-export default Forecast;
+export default Weather;
