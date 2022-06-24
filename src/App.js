@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import Form from 'react-bootstrap/Form'
-import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
 import Header from './Header.js';
 import Weather from './Weather.js';
+import Location from './Location.js';
+import Search from './Search.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +27,24 @@ class App extends React.Component {
       city: e.target.value
     });
   };
+
+  getWeather = async (lat, lon) => {
+    let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
+    try {
+      let weatherData = await axios.get(url);
+      console.log(weatherData);
+      this.setState({
+        weatherData: weatherData.data,
+        displayWeather: true
+      });
+
+    } catch (error) {
+      this.setState({
+        error: true,
+        errorMsg: `Error: No weather.`,
+      })
+    }
+  }
 
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,52 +69,24 @@ class App extends React.Component {
         errorMsg: `Oops, an error occurred: ${error.response.status}. Refresh the page and try again.`
       })
     };
-
-    getWeather = async (lat, lon) => {
-      let url = `${process.env.REACT_APP_SERVER}weather?lat=${lat}&lon=${lon}`
-      try {
-        let weatherData = await axios.get(url);
-        this.setState({
-          weatherData: weatherData.data,
-          displayWeather: true
-        });
-
-      } catch (error) {
-        this.setState({
-          error: true,
-          errorMsg: `Error: No weather.`
-        })
-      }
-    }
-
-
   };
 
   render() {
     return (
       <>
-        <Header />
-        <Form>
-          <Form.Group>
-            <Form.Label>City Search:</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder='Type your city'
-              onInput={this.handleInput}>
-            </Form.Control>
-            <button type='submit' onClick={this.handleSubmit}>EXPLORE</button>
-          </Form.Group>
-        </Form>
+        <Header/>
+        <Search 
+          handleInput={this.handleInput} 
+          handleSubmit={this.handleSubmit}
+        />
+
         {this.state.error ? <Alert>{this.state.errorMsg}</Alert> :
           <>
-            <ListGroup>
-              <ListGroup.Item>City: {this.state.cityData.display_name}</ListGroup.Item>
-              <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
-              <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-            </ListGroup>
-            <Image src={this.state.cityMap}></Image>
+            <Location cityData={this.state.cityData}/>
+            <Image src={this.state.cityMap}/>
           </>}
-          <Weather weatherData={this.state.weatherData}></Weather>
+
+        <Weather weatherData={this.state.weatherData} city={this.state.city}/>
         <footer>© Elizabeth Beale</footer>
       </>
     )
