@@ -4,9 +4,9 @@ import './App.css';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 import Header from './Header.js';
-import Weather from './Weather.js';
-import Location from './Location.js';
-import Search from './Search.js';
+import Forecast from './Forecast.js';
+import CityInfo from './CityInfo.js';
+import SearchBar from './SearchBar.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -74,19 +74,20 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header/>
-        <Search 
-          handleInput={this.handleInput} 
+        <Header />
+        <SearchBar
+          handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
         />
 
         {this.state.error ? <Alert>{this.state.errorMsg}</Alert> :
           <>
-            <Location cityData={this.state.cityData}/>
-            <Image src={this.state.cityMap}/>
+            <Image src={this.state.cityMap} />
+            <CityInfo cityData={this.state.cityData} />
+
           </>}
 
-        <Weather weatherData={this.state.weatherData} city={this.state.city}/>
+        <Forecast weatherData={this.state.weatherData} city={this.state.city} />
         <footer>© Elizabeth Beale</footer>
       </>
     )

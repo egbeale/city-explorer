@@ -1,0 +1,8 @@
+.list-group {
+    color: rgb(78, 129, 229);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.list-group-item {
+    padding: 5px;
+}
