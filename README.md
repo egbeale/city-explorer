@@ -35,6 +35,6 @@ Lab 8: Collaborated with Yajahira Velazquez on data flow mapping.
 
 Lab 9: Colaborated with Matthew Larkin on data flow mapping and rendering my weather API.
 
-![Lab9](https://user-images.githubusercontent.com/100111219/175471914-b32a042d-fe5f-4be0-b3ce-235b1cd0a7be.png)
+![lab9](https://user-images.githubusercontent.com/100111219/175480747-0f0a5fde-7907-4641-8d41-8de996c546ec.png)
 
 
