@@ -7,6 +7,7 @@ import Header from './Header.js';
 import Weather from './Weather.js';
 import CityInfo from './CityInfo.js';
 import SearchBar from './SearchBar.js';
+import Movies from './Movies.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -14,11 +15,15 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: {},
+      // displayCityData: false,
       cityMap: '',
       error: false,
       errorMsg: '',
+      weatherError: false,
       weatherData: [],
-      displayWeather: false
+      movieData: [],
+      displayWeather: false,
+      displayMovies: false,
     }
   }
 
@@ -28,6 +33,8 @@ class App extends React.Component {
     });
   };
 
+
+  // ----------- WEATHER HANDLER ------------------
   getWeather = async (lat, lon) => {
     let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
     try {
@@ -40,11 +47,29 @@ class App extends React.Component {
 
     } catch (error) {
       this.setState({
-        error: true,
+        weatherError: true,
         errorMsg: `Error: No weather.`,
       })
     }
   }
+
+  // ----------- MOVIE HANDLER --------------------
+  getMovies = async () => {
+    let url = `${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`
+    try {
+      let movieData = await axios.get(url);
+      this.setState({
+        movieData: movieData.data,
+        displayMovies: true
+      })
+    } catch (error) {
+      this.setState({
+        error: true,
+        errorMsg: `Error: ${error.response.status}. Try refreshing the page.`
+      })
+    };
+  };
+
 
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -60,13 +85,13 @@ class App extends React.Component {
         cityData: cityData.data[0],
         cityMap: cityMap
       });
-      this.getWeather(cityData.data[0].lat, cityData.data[0].lon);
-    }
+        this.getWeather(cityData.data[0].lat, cityData.data[0].lon);
+        this.getMovies();
 
-    catch (error) {
+    } catch (error) {
       this.setState({
         error: true,
-        errorMsg: `Oops, an error occurred: ${error.response.status}. Refresh the page and try again.`
+        errorMsg: `Error: ${error.response.status}. Try refreshing the page.`
       })
     };
   };
@@ -88,6 +113,7 @@ class App extends React.Component {
           </>}
 
         <Weather weatherData={this.state.weatherData} city={this.state.city} />
+        <Movies movieData={this.state.movieData} />
         <footer>© Elizabeth Beale</footer>
       </>
     )
