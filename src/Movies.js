@@ -6,7 +6,7 @@ class Movies extends React.Component {
     render() {
         return (
             <>
-                <h3>Testing {this.props.movieData}</h3>
+                <h3>I'm here {this.props.movieData}</h3>
             </>
         )
     }

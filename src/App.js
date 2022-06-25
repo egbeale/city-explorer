@@ -15,7 +15,6 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: {},
-      // displayCityData: false,
       cityMap: '',
       error: false,
       errorMsg: '',
@@ -35,14 +34,14 @@ class App extends React.Component {
 
 
   // ----------- WEATHER HANDLER ------------------
-  getWeather = async (lat, lon) => {
+  handleWeather = async (lat, lon) => {
     let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`
     try {
       let weatherData = await axios.get(url);
       console.log(weatherData);
       this.setState({
+        displayWeather: true,
         weatherData: weatherData.data,
-        displayWeather: true
       });
 
     } catch (error) {
@@ -54,8 +53,8 @@ class App extends React.Component {
   }
 
   // ----------- MOVIE HANDLER --------------------
-  getMovies = async () => {
-    let url = `${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`
+  handleMovies = async () => {
+    let url = `${process.env.REACT_APP_SERVER}/movies?location=${this.state.city}`
     try {
       let movieData = await axios.get(url);
       this.setState({
@@ -70,23 +69,28 @@ class App extends React.Component {
     };
   };
 
-
+// --------------- CITY & MAP HANDLER ------------
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-
+      //  -------------- MAP ------------------
       let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=JSON`;
-
       let cityData = await axios.get(url);
 
-      let cityMap = await `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=11`;
+      let cityMap = await `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityData.data[0].lat},${cityData.data[0].lon}&zoom=16`;
+
+      let parsedLat = parseInt(cityData.data[0].lat)
+      let parsedLon = parseInt(cityData.data[0].lon)
 
       this.setState({
         cityData: cityData.data[0],
+        lat: parsedLat,
+        lon: parsedLon,
         cityMap: cityMap
       });
-        this.getWeather(cityData.data[0].lat, cityData.data[0].lon);
-        this.getMovies();
+
+      this.handleWeather(cityData.data[0].lat, cityData.data[0].lon);
+      this.handleMovies();
 
     } catch (error) {
       this.setState({
@@ -107,13 +111,13 @@ class App extends React.Component {
 
         {this.state.error ? <Alert>{this.state.errorMsg}</Alert> :
           <>
-            <Image src={this.state.cityMap} />
-            <CityInfo cityData={this.state.cityData} />
+            <Image src={this.state.cityMap}/>
+            <CityInfo cityData={this.state.cityData} cityMap={this.state.cityMap}/>
 
           </>}
 
-        <Weather weatherData={this.state.weatherData} city={this.state.city} />
-        <Movies movieData={this.state.movieData} />
+        <Weather weatherData={this.state.weatherData} city={this.state.city}/>
+        <Movies movieData={this.state.movieData}/>
         <footer>© Elizabeth Beale</footer>
       </>
     )
