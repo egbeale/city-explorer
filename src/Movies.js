@@ -6,10 +6,20 @@ class Movies extends React.Component {
     render() {
         return (
             <>
-                <h3>I'm here {this.props.movieData}</h3>
+                {this.props.movieData.map((movie, idx) => (
+                    <ul key={idx}>
+                        <li>{movie.title}:</li>
+                        <li>{movie.image}</li>
+                        {/* template literal image tag with url , movie.img */}
+                    </ul>
+                ))}
             </>
-        )
+        );
+
     }
+
 }
+
+// https://image.tmdb.org/t/p/w300
 
 export default Movies;
