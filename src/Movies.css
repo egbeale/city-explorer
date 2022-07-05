@@ -1,3 +1,11 @@
-h3 {
-    background-color: green;
+.card {
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.card-text {
+    color: blue;
+    margin: 40px 200px;
+    background-color: white;
+    padding: 10px;
 }
